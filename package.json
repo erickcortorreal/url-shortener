@@ -1,0 +1,21 @@
+{
+  "packageManager": "npm@20.18.3",
+  "name": "url-shortener",
+  "version": "1.0.0",
+  "description": "A simple URL shortener built using NestJS for the backend and React with Vite for the frontend. The project is structured as a monorepo using Nx and TurboRepo for optimized task execution.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "start": "node ./apps/api/dist/main.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "workspaces": [
+    "apps/*"
+  ],
+  "devDependencies": {
+    "turbo": "^2.4.4"
+  }
+}
