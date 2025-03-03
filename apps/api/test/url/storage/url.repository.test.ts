@@ -1,20 +1,15 @@
 import { UrlRepository } from '../../../src/url/storage/url.repository';
-import { UrlEntity } from '../../../src/url/storage/url.entity';
-import { DataSource } from 'typeorm';
 import { TestDatabase } from '../../shared/database-test-utils';
 
 describe('UrlRepository (Integration)', () => {
   let repository: UrlRepository;
-  let dataSource: DataSource;
 
   beforeAll(async () => {
-    await TestDatabase.start();
-    dataSource = TestDatabase.getDataSource();
-    repository = new UrlRepository(dataSource);
+    await TestDatabase.getInstance().start()
+    repository = new UrlRepository(TestDatabase.getInstance().getDataSource());
   });
 
   afterAll(async () => {
-    await TestDatabase.stop();
   });
 
   it('should insert and retrieve a URL', async () => {

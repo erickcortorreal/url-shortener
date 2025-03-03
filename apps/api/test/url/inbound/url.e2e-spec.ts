@@ -1,18 +1,18 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication, HttpStatus } from '@nestjs/common';
+import {Test, TestingModule} from '@nestjs/testing';
+import {INestApplication, HttpStatus} from '@nestjs/common';
 import * as request from 'supertest';
-import { AppModule } from '../../../src/app.module';
-import { TestDatabase } from '../../shared/database-test-utils';
+import {AppModule} from '../../../src/app.module';
+import {TestDatabase} from "../../shared/database-test-utils";
+import {DataSource} from "typeorm";
 
 describe('UrlController (e2e) with Testcontainers', () => {
   let app: INestApplication;
 
   beforeAll(async () => {
-    await TestDatabase.start();
-
+    await TestDatabase.getInstance().start()
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
-    }).compile();
+    }).overrideProvider(DataSource).useValue(TestDatabase.getInstance().getDataSource()).compile();
 
     app = moduleFixture.createNestApplication();
     await app.init();
@@ -20,13 +20,12 @@ describe('UrlController (e2e) with Testcontainers', () => {
 
   afterAll(async () => {
     await app.close();
-    await TestDatabase.stop();
   });
 
   it('POST /url/shorten should create a short URL', async () => {
     const response = await request(app.getHttpServer())
-      .post('/url/shorten')
-      .send({ url: 'https://example.com' })
+      .post('/api/url/shorten')
+      .send({url: 'https://example.com'})
       .expect(HttpStatus.CREATED);
 
     expect(response.body).toHaveProperty('slug');
@@ -35,24 +34,24 @@ describe('UrlController (e2e) with Testcontainers', () => {
 
   it('POST /url/shorten should return 400 if URL is missing', async () => {
     await request(app.getHttpServer())
-      .post('/url/shorten')
+      .post('/api/url/shorten')
       .send({})
       .expect(HttpStatus.BAD_REQUEST)
-      .expect({ statusCode: 400, message: 'URL is required' });
+      .expect({statusCode: 400, message: 'URL is required'});
   });
 
   it('GET /url/:slug should redirect to the original URL', async () => {
     // First, shorten a URL
     const shortenResponse = await request(app.getHttpServer())
-      .post('/url/shorten')
-      .send({ url: 'https://example.com' })
+      .post('/api/url/shorten')
+      .send({url: 'https://example.com'})
       .expect(HttpStatus.CREATED);
 
     const slug = shortenResponse.body.slug;
 
     // Now test redirection
     const redirectResponse = await request(app.getHttpServer())
-      .get(`/url/${slug}`)
+      .get(`/api/url/${slug}`)
       .expect(HttpStatus.FOUND);
 
     expect(redirectResponse.headers.location).toBe('https://example.com');
@@ -60,8 +59,8 @@ describe('UrlController (e2e) with Testcontainers', () => {
 
   it('GET /url/:slug should return 404 for non-existent slug', async () => {
     await request(app.getHttpServer())
-      .get('/url/nonexistent')
+      .get('/api/url/nonexistent')
       .expect(HttpStatus.NOT_FOUND)
-      .expect({ statusCode: 404, message: 'Not Found' });
+      .expect({statusCode: 404, message: 'Not Found'});
   });
 });

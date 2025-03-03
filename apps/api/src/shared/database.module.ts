@@ -11,9 +11,9 @@ import { UrlEntity } from '../url/storage/url.entity';
       type: 'postgres',
       host: process.env.DB_HOST || 'localhost',
       port: parseInt(process.env.DB_PORT as string, 10) || 5432,
-      username: process.env.DB_USER || 'shortener_user',
-      password: process.env.DB_PASS || 'shortener_pass',
-      database: process.env.DB_NAME || 'url_shortener',
+      username: process.env.DB_USER || 'testuser',
+      password: process.env.DB_PASS || 'testpass',
+      database: process.env.DB_NAME || 'testdb',
       entities: [UrlEntity],
       synchronize: false,
       migrations: ['dist/migrations/*.js'],
@@ -25,6 +25,14 @@ export class DatabaseModule implements OnModuleInit {
   constructor(private readonly dataSource: DataSource) {}
 
   async onModuleInit() {
-    await this.dataSource.runMigrations();
+    try {
+      if (this.dataSource.isInitialized) {
+        return;
+      }
+      await this.dataSource.initialize();
+      await this.dataSource.runMigrations();
+    } catch (error) {
+      process.exit(1);
+    }
   }
 }

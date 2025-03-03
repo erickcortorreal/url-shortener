@@ -1,0 +1,162 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background: #e5e7eb;
+}
+
+.shortener-container {
+    width: 380px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+.browser-header {
+    background: #d1d5db;
+    padding: 8px;
+    display: flex;
+    gap: 6px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #6b7280;
+}
+
+.shortener-content {
+    padding: 24px;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.description {
+    font-size: 14px;
+    color: #555;
+    margin-top: 5px;
+}
+
+
+.input-label {
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 16px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    background: white;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    padding-top: 10px;
+}
+
+.button-container {
+    margin-top: 20px;
+}
+
+.shorten-button {
+    background: #5b21b6;
+    color: white;
+    font-weight: bold;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-align: center;
+}
+
+.shorten-button:hover {
+    background: #4c1d95;
+}
+
+.shorten-button:disabled {
+    background: #c4b5fd;
+    cursor: not-allowed;
+}
+
+.success-message {
+    margin-top: 15px;
+    padding: 10px;
+    color: #065f46;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+.short-url {
+    color: #5b21b6;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.short-url:hover {
+    text-decoration: underline;
+}
+
+.error-message {
+    margin-top: 10px;
+    color: red;
+    font-size: 14px;
+}
+
+.copy-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border: 2px solid #6a0dad;
+    background: white;
+    color: #6a0dad;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.copy-button:hover {
+    background: #6a0dad;
+    color: white;
+}
+
+.copy-button:hover .copy-icon {
+    color: white;
+}
+
+.short-url-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+

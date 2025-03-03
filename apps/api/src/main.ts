@@ -11,7 +11,12 @@ async function bootstrap() {
     .setVersion('1.0')
     .addTag('url')
     .build();
-
+  // Enable CORS for any origin/ to be removed for prod
+  app.enableCors({
+    origin: '*', // Allows requests from any frontend
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    allowedHeaders: 'Content-Type, Authorization',
+  });
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/docs', app, document);
 
