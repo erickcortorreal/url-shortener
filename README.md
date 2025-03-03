@@ -52,6 +52,11 @@ Run both backend (API) and frontend (Web) together:
 ```sh
 npm run dev
 ```
+- Frontend: http://localhost:5173/
+- Backend: http://localhost:3000/
+- Docs: http://localhost:3000/api/docs
+
+If you want to run them independent, just enter into each app folder and run `npm run dev`
 
 Run the tests
 ```
