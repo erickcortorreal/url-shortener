@@ -1,14 +1,12 @@
-version: '3.8'
-
 services:
   postgres:
     image: postgres:15
     container_name: url-shortener-db
     restart: always
     environment:
-      POSTGRES_USER: shortener_user
-      POSTGRES_PASSWORD: shortener_pass
-      POSTGRES_DB: url_shortener
+      POSTGRES_USER: testuser
+      POSTGRES_PASSWORD: testpass
+      POSTGRES_DB: testdb
     ports:
       - "5432:5432"
     volumes:
@@ -25,16 +23,15 @@ services:
     environment:
       DB_HOST: postgres
       DB_PORT: 5432
-      DB_USER: shortener_user
-      DB_PASS: shortener_pass
-      DB_NAME: url_shortener
-      DATABASE_URL: "postgresql://shortener_user:shortener_pass@postgres:5432/url_shortener"
+      DB_USER: testuser
+      DB_PASS: testpass
+      DB_NAME: testdb
+      MIGRATIONS_PATH: /app/apps/api/dist/migrations/*.js
     ports:
       - "3000:3000"
     networks:
       - shortener_network
-    command: ["npm", "run", "start"]
-
+    command: [ "sh", "-c", "sleep 5 && npm run start" ]
 networks:
   shortener_network:
     driver: bridge

@@ -4,7 +4,6 @@ import * as request from 'supertest';
 import {AppModule} from '../../../src/app.module';
 import {TestDatabase} from "../../shared/database-test-utils";
 import {DataSource} from "typeorm";
-
 describe('UrlController (e2e) with Testcontainers', () => {
   let app: INestApplication;
 
@@ -19,7 +18,6 @@ describe('UrlController (e2e) with Testcontainers', () => {
   });
 
   afterAll(async () => {
-    await app.close();
   });
 
   it('POST /url/shorten should create a short URL', async () => {

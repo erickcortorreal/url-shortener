@@ -1,74 +1,60 @@
 # URL Shortener
 ## Description
-A simple URL shortener built using NestJS for the backend and React with Vite for the frontend. The project is structured as a monorepo using Nx and TurboRepo for optimized task execution.
+A simple URL shortener built using NestJS for the backend and React with Vite for the frontend. The project is structured as a monorepo using TurboRepo for optimized task execution.
+
+## Features
+
+- Shorten long URLs with ease 
+- Retrieve original URLs using short links 
+- Simple and responsive frontend interface 
+- REST API for URL shortening and redirection 
+- Docker support for easy deployment
+
+## Tech Stack
+
+- Frontend: React (TypeScript), Vite, Vitest 
+- Backend: Node.js (TypeScript), NestJS, Jest
+- Database: PostgreSQL
+- Containerization: Docker
 
 ## Prerequisites
 - **Node.js v20+** (Ensure you have at least Node.js **v20** installed, as NestJS v11 requires it)
-- **Yarn** (Recommended package manager for monorepo handling)
 - **Docker & Docker Compose** (If running with Docker Compose, install it from [here](https://docs.docker.com/compose/install/))
 
-## Project Structure
-```
-url-shortener/
-├── api/       # NestJS backend
-│   ├── src/
-│   ├── package.json
-│   ├── tsconfig.json
-│   ├── Dockerfile
-│   ├── .env
-├── web/       # React (Vite) frontend
-│   ├── src/
-│   ├── package.json
-│   ├── tsconfig.json
-│   ├── Dockerfile
-│   ├── .env
-├── docker-compose.yml  # Configuration for Docker
-├── package.json        # Monorepo workspace configuration
-├── nx.json             # Nx workspace configuration
-├── README.md           # Project documentation
-└── .gitignore
-```
 
 ## Available Commands
 
-### Install Dependencies
+### Docker compose run
+This requires docker to be installed and running, run this command if you want to start the app (backend, frontend and database), everything at once, no more config.
 ```sh
-yarn install
+docker compose up
 ```
 
-### Start the Development Servers
+Go to http://localhost:3000/ and the app is ready to be used
+
+For API documentation go: http://localhost:3000/api/docs
+
+### Start the Development 
+Install cli dependencies for development (optional)
+```
+npm install -g @nestjs/cli jest vite vitest turbo
+```
+Install dependencies 
+```sh
+npm install
+```
+if you don't have a postgres instance running, just run:
+```
+docker compose up -d postgres
+```
+
 Run both backend (API) and frontend (Web) together:
 ```sh
-yarn dev
-```
-Or run them separately:
-```sh
-yarn dev:api  # Start the NestJS API
-yarn dev:web  # Start the React app
+npm run dev
 ```
 
-### Build for Production
-```sh
-yarn build
+Run the tests
 ```
-
-### Run with Docker
-```sh
-docker-compose up --build
+npm test
 ```
-
-### Run Prisma Migrations
-```sh
-cd api
-npx prisma migrate dev --name init
-```
-
-### Test the API
-```sh
-cd api
-yarn test
-```
-
-## Deployment
-To deploy, push the Docker images to a registry and configure hosting for both backend and frontend.
 

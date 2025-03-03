@@ -9,9 +9,6 @@ describe('UrlRepository (Integration)', () => {
     repository = new UrlRepository(TestDatabase.getInstance().getDataSource());
   });
 
-  afterAll(async () => {
-  });
-
   it('should insert and retrieve a URL', async () => {
     const url = await repository.createUrl('https://example.com', 'abc123');
     const foundUrl = await repository.findBySlug('abc123');

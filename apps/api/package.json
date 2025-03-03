@@ -6,12 +6,12 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "build": "nest build",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start": "nest start",
-    "dev": "nest start --watch",
-    "lint": "eslint \"{src,apps,libs}/**/*.ts\" --fix",
-    "test": "jest --config ./test/jest.json"
+    "build": "npx nest build",
+    "format": "npx prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "start": "npx nest start",
+    "dev": "npx nest start --watch",
+    "lint": "npxeslint \"{src,apps,libs}/**/*.ts\" --fix",
+    "test": "npx jest --config ./test/jest.json --testTimeout=30000"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",

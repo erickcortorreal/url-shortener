@@ -4,10 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "test": "vitest --run"
+    "dev": "npx vite",
+    "build": "npx tsc -b && vite build",
+    "lint": "npx eslint .",
+    "test": "npx vitest --run"
   },
   "dependencies": {
     "react": "^19.0.0",

@@ -5,10 +5,10 @@
   "description": "A simple URL shortener built using NestJS for the backend and React with Vite for the frontend. The project is structured as a monorepo using Nx and TurboRepo for optimized task execution.",
   "main": "index.js",
   "scripts": {
-    "dev": "turbo dev",
-    "build": "turbo build",
+    "dev": "npx turbo dev",
+    "build": "npx turbo build",
     "start": "node ./apps/api/dist/main.js",
-    "test": "turbo test"
+    "test": "npx turbo test"
   },
   "keywords": [],
   "author": "",
