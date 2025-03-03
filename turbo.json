@@ -5,6 +5,7 @@
       "persistent": true,
       "cache": false
     },
+    "test": {},
     "build": {
       "dependsOn": [
         "^build"
